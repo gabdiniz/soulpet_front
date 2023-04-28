@@ -4,6 +4,7 @@ import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
+import { uploadFotoPet } from "../../Firebase/pets";
 
 export function EditaPet() {
 
@@ -12,15 +13,37 @@ export function EditaPet() {
   const { id } = useParams();
 
   function onSubmit(data) {
-    axios.put(`http://localhost:3001/pets/${id}`, data)
-      .then(response => {
-        toast.success(response.data.message, { position: "bottom-right", duration: 2000 });
-        navigate("/pets");
-      })
-      .catch(error => {
-        toast.error(error.response.data.message, { position: "bottom-right", duration: 2000 });
-        console.log(error);
-      });
+    const img = data.imagem[0];
+    if (img) {
+      const toastId = toast.loading("Upload da imagem...", { position: "bottom-right" });
+      uploadFotoPet(img)
+        .then((url) => {
+          toast.dismiss(toastId);
+          data.imagemUrl = url;
+          console.log(data)
+          delete data.imagem;
+          PutPet()
+        })
+        .catch(() => {
+          toast.error("Um erro ocorreu.");
+        })
+    }
+    else {
+      PutPet()
+    }
+
+    function PutPet() {
+      if (!data.dataNasc) delete data.dataNasc;
+      axios.put(`http://localhost:3001/pets/${id}`, data)
+        .then(response => {
+          toast.success(response.data.message, { position: "bottom-right", duration: 2000 });
+          navigate("/pets");
+        })
+        .catch(error => {
+          toast.error(error.response.data.message, { position: "bottom-right", duration: 2000 });
+          console.log(error);
+        });
+    }
   }
 
   useEffect(() => {
@@ -57,6 +80,11 @@ export function EditaPet() {
           <Form.Label>Data de nascimento</Form.Label>
           <Form.Control type="date" className={errors.porte && "is-invalid"} {...register("dataNasc")} />
           {errors.dataNasc && <Form.Text className="invalid-feedback">{errors.dataNasc.message}</Form.Text>}
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Imagem de Perfil</Form.Label>
+          <Form.Control type="file" {...register("imagem")} />
         </Form.Group>
 
         <Button variant="primary" type="submit">
