@@ -85,7 +85,7 @@ export function Produtos(){
                                             <Button onClick={() => handleShow(produto.id)}>
                                                 <i className="bi bi-trash-fill"></i>
                                             </Button>
-                                            <Button>
+                                            <Button as={Link} to={`/produto/editar/${produto.id}`}>
                                                 <i className="bi bi-pencil-fill"></i>
                                             </Button>
                                         </td>
