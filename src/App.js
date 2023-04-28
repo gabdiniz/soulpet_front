@@ -6,6 +6,7 @@ import { Clientes } from "./pages/Clientes/Clientes";
 import { EditaCliente } from "./pages/EditaCliente/EditaCliente";
 import { NovoProduto } from "./pages/NovoProduto/NovoProduto";
 import { NovoServico } from "./pages/NovoServico/NovoServico";
+import { Produtos } from "./pages/Produtos/Produtos";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Root />}>
           <Route path="/" element={<Home />} />
           <Route path="/clientes" element={<Clientes />} />
+          <Route path="/produtos" element={<Produtos />} />
           <Route path="/clientes/novo" element={<NovoCliente />} />
           <Route path="/produto/novo" element={<NovoProduto />} />
           <Route path="/servicos/novo" element={<NovoServico />} />
