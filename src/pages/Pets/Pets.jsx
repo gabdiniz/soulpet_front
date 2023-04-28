@@ -47,20 +47,20 @@ export function Pets() {
               </tr>
             </thead>
             <tbody>
-              {pets.map(pets => {
+              {pets.map(pet => {
                 return (
-                  <tr key={pets.id}>
-                    <td>{pets.id}</td>
-                    <td>{pets.nome}</td>
-                    <td>{pets.tipo}</td>
-                    <td>{pets.porte}</td>
-                    <td>{pets.dataNasc}</td>
-                    <td>{pets.clienteId}</td>
+                  <tr key={pet.id}>
+                    <td>{pet.id}</td>
+                    <td>{pet.nome}</td>
+                    <td>{pet.tipo}</td>
+                    <td>{pet.porte}</td>
+                    <td>{pet.dataNasc}</td>
+                    <td>{pet.clienteId}</td>
                     <td className="d-flex gap-2">
                       <Button>
                         <i className="bi bi-trash-fill"></i>
                       </Button>
-                      <Button>
+                      <Button as={Link} to={`/pets/editar/${pet.id}`}>
                         <i className="bi bi-pencil-fill"></i>
                       </Button>
                       <Button as={Link} to="/pets/detalhes">
