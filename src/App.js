@@ -5,6 +5,7 @@ import { NovoCliente } from "./pages/NovoCliente/NovoCliente";
 import { Clientes } from "./pages/Clientes/Clientes";
 import { EditaCliente } from "./pages/EditaCliente/EditaCliente";
 import { NovoProduto } from "./pages/NovoProduto/NovoProduto";
+import { NovoPedido } from "./pages/NovoPedido/NovoPedido";
 import { NovoServico } from "./pages/NovoServico/NovoServico";
 import { NovoPet } from "./pages/NovoPet/NovoPet";
 import { Produtos } from "./pages/Produtos/Produtos";
@@ -12,7 +13,6 @@ import { Servicos } from "./pages/Servicos/Servicos";
 import { Pets } from "./pages/Pets/Pets";
 import { EditaPet } from "./pages/EditaPet/EditaPet";
 import { EditaProduto } from "./pages/EditaProduto/EditaProduto";
-
 
 function App() {
   return (
@@ -25,6 +25,7 @@ function App() {
           <Route path="/servicos" element={<Servicos />} />
           <Route path="/clientes/novo" element={<NovoCliente />} />
           <Route path="/produto/novo" element={<NovoProduto />} />
+          <Route path="/pedido/novo" element={<NovoPedido />} />
           <Route path="/servicos/novo" element={<NovoServico />} />
           <Route path="/clientes/editar/:id" element={<EditaCliente />} />
           <Route path="/produto/editar/:id" element={<EditaProduto />} />
