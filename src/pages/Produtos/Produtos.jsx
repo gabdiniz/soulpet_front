@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react";
-import { Button, Modal, Table } from "react-bootstrap"
+import { Button, Modal, Table, Form } from "react-bootstrap"
 import { Loader } from "../../components/Loader/Loader";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -11,6 +11,8 @@ export function Produtos(){
     const [produtos, setProdutos] = useState(null);
     const [show, setShow] = useState(false);
     const [idProduto, setIdProduto] = useState(null);
+    const [filtroNome, setFiltroNome] = useState("");
+    const [filtroCategoria, setFiltroCategoria] = useState("");
 
     const handleClose = () => {
         setIdProduto(null);
@@ -26,7 +28,12 @@ export function Produtos(){
     }, []);
 
     function initializeTable() {
-        axios.get("http://localhost:3001/produtos")
+        const filtro = {
+            nome: filtroNome,
+            categoria: filtroCategoria,
+        }
+
+        axios.get("http://localhost:3001/produtos", { params: filtro})
         .then(response => {
             setProdutos(response.data);
         })
@@ -56,6 +63,31 @@ export function Produtos(){
                     <i className="bi bi-plus-lg me-2"></i> Produto
                 </Button>
                 </div>
+                
+                <div className="mb-3">
+        <Form.Group className="mb-3" controlId="filtroNome">
+          <Form.Label>Filtrar por Nome:</Form.Label>
+          <Form.Control
+            type="text"
+            value={filtroNome}
+            onChange={(e) => setFiltroNome(e.target.value)}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="filtroCategoria">
+          <Form.Label>Filtrar por Categoria:</Form.Label>
+          <Form.Control
+            type="text"
+            value={filtroCategoria}
+            onChange={(e) => setFiltroCategoria(e.target.value)}
+          />
+        </Form.Group>
+
+        <Button variant="primary" onClick={initializeTable}>
+          Filtrar
+        </Button>
+      </div>
+
             {
                 produtos === null ?
                     <Loader />
