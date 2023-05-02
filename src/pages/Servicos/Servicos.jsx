@@ -76,7 +76,7 @@ export function Servicos(){
                                             <Button onClick={() => handleShow(servico.id)}>
                                                 <i className="bi bi-trash-fill"></i>
                                             </Button>
-                                            <Button>
+                                            <Button as={Link} to={`/servicos/editar/${servico.id}`}>
                                                 <i className="bi bi-pencil-fill"></i>
                                             </Button>
                                         </td>
