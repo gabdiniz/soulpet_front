@@ -92,7 +92,7 @@ export function Produtos(){
                 produtos === null ?
                     <Loader />
                     :
-            <Table striped bordered hover>
+            <Table striped bordered hover responsive>
                         <thead>
                             <tr>
                                 <th>Nome</th>

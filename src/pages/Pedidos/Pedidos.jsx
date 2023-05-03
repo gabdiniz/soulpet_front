@@ -79,7 +79,7 @@ export function Pedidos() {
   }
 
   return (
-    <div className="container">
+    <div className="container mt-3">
       <div className="d-flex justify-content-between align-items-center">
         <h1>Pedidos</h1>
         <Button as={Link} to="/pedido/novo">
@@ -121,7 +121,7 @@ export function Pedidos() {
       {pedidos === null ? (
         <Loader />
       ) : (
-        <Table striped bordered hover>
+        <Table striped bordered hover responsive>
           <thead>
             <tr>
               <th>Cliente</th>
