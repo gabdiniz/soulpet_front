@@ -18,7 +18,7 @@ export function Agendamentos() {
     const handleShow = (id) => {
         setIdAgendamento(id);
         setShow(true)
-    }
+    };
 
     useEffect(() => {
         initializeTable();
@@ -27,6 +27,7 @@ export function Agendamentos() {
     function initializeTable() {
         axios.get("http://localhost:3001/agendamentos")
             .then(response => {
+                console.log(response.data)
                 setAgendamentos(response.data);
             })
             .catch(error => {
@@ -83,7 +84,7 @@ export function Agendamentos() {
                                         <Button onClick={() => handleShow(agendamento.id)}>
                                             <i className="bi bi-trash-fill"></i>
                                         </Button>
-                                            <Button >
+                                            <Button as={Link} to={`/agendamentos/editar/${agendamento.id}`}>
                                                 <i className="bi bi-pencil-fill"></i>
                                             </Button>
                                         </td>
