@@ -18,6 +18,7 @@ import { DetalhesCliente } from "./pages/DetalhesCliente/DetalheCliente";
 import { EditaServico } from "./pages/EditaServico/EditaServico";
 import { NovoAgendamento } from "./pages/NovoAgendamento/NovoAgendamento";
 import { EditarPedido } from "./pages/EditarPedido/EditarPedido";
+import { Agendamentos } from "./pages/Agendamentos/Agendamentos";
 
 function App() {
   return (
@@ -42,6 +43,8 @@ function App() {
           <Route path="/pets" element={<Pets />} />
           <Route path="/pets/editar/:id" element={<EditaPet />} />
           <Route path="/agendamentos/novo" element={<NovoAgendamento />} />
+          <Route path="/agendamentos" element={<Agendamentos />} />
+
         </Route>
       </Routes>
     </BrowserRouter>
