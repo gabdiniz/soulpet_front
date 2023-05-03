@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Container, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
 
@@ -38,48 +38,61 @@ export function DetalhesCliente() {
   
   
   return (
-    <><Container>
+    <>
       {cliente !== null && (
-        <>
-          <h2>{cliente.nome}</h2>
-          <h3>Informações de contato:</h3>
-          <p>E-mail: {cliente.email}</p>
-          <p>Telefone: {cliente.telefone}</p>
-          <h3>Endereço:</h3>
-          <p>UF: {endereco.uf}</p>
-          <p>Cidade: {endereco.cidade}</p>
-          <p>CEP: {endereco.cep}</p>
-          <p>Rua: {endereco.rua}</p>
-          <p>Número: {endereco.numero}</p>
-          <h3>Pets:</h3>
-          {pets.length > 0 ? (
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>Nome</th>
-                  <th>Porte</th>
-                  <th>Tipo</th>
-                  <th>Data de Nascimento</th>
+
+  <div class="card border border-primary mt-4">
+
+<div class="card-header bg-white py-3">
+  <p class="text-center small mb-2"><h3>Detalhes do cliente</h3></p>
+  
+</div>
+
+<div class="card-body">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Nome: <strong>{cliente.nome}</strong></li>
+    <li class="list-group-item">Email: <strong>{cliente.email}</strong></li>
+    <li class="list-group-item">Telefone: <strong>{cliente.telefone}</strong></li>
+    <li class="list-group-item">Endereço: <strong>{cliente.email}</strong></li>
+
+    <li class="list-group-item">Rua: <strong>{endereco.rua}</strong></li>
+    <li class="list-group-item">Número: <strong>{endereco.numero}</strong></li>
+    <li class="list-group-item">Cidade: <strong>{endereco.cidade}</strong></li>
+    <li class="list-group-item">UF: <strong>{endereco.uf}</strong></li>
+    <li class="list-group-item">CEP: <strong>{endereco.cep}</strong></li>
+  </ul>
+</div>
+
+<div class="card-footer bg-white py-3">
+<h3 className="text-center mb-2">Pets:</h3>
+      {pets.length > 0 ? (
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Porte</th>
+              <th>Tipo</th>
+              <th>Data de Nascimento</th>
+            </tr>
+          </thead>
+          <tbody>
+            {pets.map((pet) => {
+              return (
+                <tr key={pet.id}>
+                  <td>{pet.nome}</td>
+                  <td>{pet.porte}</td>
+                  <td>{pet.tipo}</td>
+                  <td>{new Date(pet.dataNasc).toLocaleDateString()}</td>
                 </tr>
-              </thead>
-              <tbody>
-                {pets.map((pet) => {
-                  return (
-                    <tr key={pet.id}>
-                      <td>{pet.nome}</td>
-                      <td>{pet.porte}</td>
-                      <td>{pet.tipo}</td>
-                      <td>{new Date(pet.dataNasc).toLocaleDateString()}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </Table>
-          ) : (
-            <p>O cliente não possui pets cadastrados.</p>
-          )}
-        </>
-      )}</Container>
+              );
+            })}
+          </tbody>
+        </Table>
+      ) : (
+        <p>O cliente não possui pets cadastrados.</p>
+      )}</div>
+</div>
+  )}
     </>
   );
 }

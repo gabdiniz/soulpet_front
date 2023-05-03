@@ -21,6 +21,7 @@ import { EditarPedido } from "./pages/EditarPedido/EditarPedido";
 import { Agendamentos } from "./pages/Agendamentos/Agendamentos";
 import { EditaAgendamento } from "./pages/EditaAgendamento/EditaAgendamento";
 import { DetalhesPedidos } from "./pages/DetalhesPedidos/DetalhesPedidos";
+import { Dashboard } from "./pages/Dashboard/Dashboard";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Root />}>
           <Route path="/" element={<Home />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/clientes" element={<Clientes />} />
           <Route path="/produtos" element={<Produtos />} />
           <Route path="/servicos" element={<Servicos />} />

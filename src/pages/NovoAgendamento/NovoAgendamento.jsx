@@ -23,7 +23,7 @@ export function NovoAgendamento() {
 
     
     return (
-        <div className="container">
+        <div className="container mt-3">
         <h1>Novo Agendamento</h1>
         <Form onSubmit={handleSubmit(onSubmit)}>
             <Form.Group className="mb-3">

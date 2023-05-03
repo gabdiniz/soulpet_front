@@ -1,7 +1,9 @@
 .header {
     background-color: #3b2712;
 }
-
+.nav-link {
+    color: #a69e96!important;
+  }
 .header nav img {
     width: 70px;
     height: 70px;

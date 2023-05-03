@@ -10,7 +10,7 @@ export function Clientes() {
     const [clientes, setClientes] = useState(null);
     const [show, setShow] = useState(false);
     const [idCliente, setIdCliente] = useState(null);
-
+  
     const handleClose = () => {
         setIdCliente(null);
         setShow(false)
@@ -48,7 +48,7 @@ export function Clientes() {
     }
 
     return (
-        <div className="clientes container">
+        <div className="clientes container mt-3">
             <div className="d-flex justify-content-between align-items-center">
                 <h1>Clientes</h1>
                 <Button as={Link} to="/clientes/novo">
@@ -59,7 +59,7 @@ export function Clientes() {
                 clientes === null ?
                     <Loader />
                     :
-                    <Table striped bordered hover>
+                    <Table striped bordered hover responsive>
                         <thead>
                             <tr>
                                 <th>Nome</th>
@@ -82,9 +82,13 @@ export function Clientes() {
                                             <Button as={Link} to={`/clientes/editar/${cliente.id}`}>
                                                 <i className="bi bi-pencil-fill"></i>
                                             </Button>
-                                            <Button as={Link} to={`/clientes/detalhes/${cliente.id}`} variant="info" >
-                                                <i className="bi bi-info-circle-fill"></i>
-                                            </Button>
+                                            <Button
+                      variant="info"
+                      as={Link}
+                      to={`/clientes/detalhes/${cliente.id}`}
+                    >
+                      <i className="bi bi-info-circle-fill"></i>
+                    </Button>
                                         </td>
                                     </tr>
                                 )
