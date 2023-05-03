@@ -18,6 +18,9 @@ import { DetalhesCliente } from "./pages/DetalhesCliente/DetalheCliente";
 import { EditaServico } from "./pages/EditaServico/EditaServico";
 import { NovoAgendamento } from "./pages/NovoAgendamento/NovoAgendamento";
 import { Agendamentos } from "./pages/Agendamentos/Agendamentos";
+import { EditaAgendamento } from "./pages/EditaAgendamento/EditaAgendamento";
+
+
 
 function App() {
   return (
@@ -42,7 +45,7 @@ function App() {
           <Route path="/pets/editar/:id" element={<EditaPet />} />
           <Route path="/agendamentos/novo" element={<NovoAgendamento />} />
           <Route path="/agendamentos" element={<Agendamentos />} />
-
+          <Route path="/agendamentos/editar/:id" element={<EditaAgendamento />} />
         </Route>
       </Routes>
     </BrowserRouter>
