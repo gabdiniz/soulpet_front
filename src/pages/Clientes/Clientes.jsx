@@ -10,7 +10,7 @@ export function Clientes() {
     const [clientes, setClientes] = useState(null);
     const [show, setShow] = useState(false);
     const [idCliente, setIdCliente] = useState(null);
-  
+
     const handleClose = () => {
         setIdCliente(null);
         setShow(false)
@@ -76,11 +76,14 @@ export function Clientes() {
                                         <td>{cliente.email}</td>
                                         <td>{cliente.telefone}</td>
                                         <td className="d-flex gap-2">
-                                            <Button onClick={() => handleShow(cliente.id)}>
+                                            <Button variant="danger" onClick={() => handleShow(cliente.id)}>
                                                 <i className="bi bi-trash-fill"></i>
                                             </Button>
                                             <Button as={Link} to={`/clientes/editar/${cliente.id}`}>
                                                 <i className="bi bi-pencil-fill"></i>
+                                            </Button>
+                                            <Button as={Link} to={`/clientes/detalhes/${cliente.id}`} variant="info" >
+                                                <i className="bi bi-info-circle-fill"></i>
                                             </Button>
                                         </td>
                                     </tr>

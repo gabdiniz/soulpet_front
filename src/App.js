@@ -17,10 +17,10 @@ import { Pedidos } from "./pages/Pedidos/Pedidos";
 import { DetalhesCliente } from "./pages/DetalhesCliente/DetalheCliente";
 import { EditaServico } from "./pages/EditaServico/EditaServico";
 import { NovoAgendamento } from "./pages/NovoAgendamento/NovoAgendamento";
+import { EditarPedido } from "./pages/EditarPedido/EditarPedido";
 import { Agendamentos } from "./pages/Agendamentos/Agendamentos";
 import { EditaAgendamento } from "./pages/EditaAgendamento/EditaAgendamento";
-
-
+import { DetalhesPedidos } from "./pages/DetalhesPedidos/DetalhesPedidos";
 
 function App() {
   return (
@@ -35,9 +35,11 @@ function App() {
           <Route path="/produto/novo" element={<NovoProduto />} />
           <Route path="/pedidos" element={<Pedidos />} />
           <Route path="/pedido/novo" element={<NovoPedido />} />
+          <Route path="/pedidos/editar/:id" element={<EditarPedido />} />
           <Route path="/servicos/novo" element={<NovoServico />} />
           <Route path="/clientes/editar/:id" element={<EditaCliente />} />
           <Route path="/clientes/detalhes/:id" element={<DetalhesCliente />} />
+          <Route path="/pedidos/detalhes/:id" element={<DetalhesPedidos />} />
           <Route path="/produto/editar/:id" element={<EditaProduto />} />
           <Route path="/servicos/editar/:id" element={<EditaServico />} />
           <Route path="/pets/novo" element={<NovoPet />} />
