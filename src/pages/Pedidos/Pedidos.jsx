@@ -7,99 +7,76 @@ import { toast } from "react-hot-toast";
 
 export function Pedidos() {
   const [pedidos, setPedidos] = useState(null);
+  const [clientes, setClientes] = useState(null);
+  const [produtos, setProdutos] = useState(null);
   const [clienteFiltro, setClienteFiltro] = useState("");
   const [produtoFiltro, setProdutoFiltro] = useState("");
-  const [clienteNome, setClienteNome] = useState({});
-  const [produtoNome, setProdutoNome] = useState({});
   const [show, setShow] = useState(false);
   const [idPedido, setIdPedido] = useState(null);
 
   const handleClose = () => {
     setIdPedido(null);
-    setShow(false)
-};
-const handleShow = (id) => {
+    setShow(false);
+  };
+  const handleShow = (id) => {
     setIdPedido(id);
-    setShow(true)
-};
-
-  useEffect(() => {
-    initializeTable();
-  }, []);
-
-  function initializeTable() {
-    axios
-      .get("http://localhost:3001/pedidos")
-      .then((response) => {
-        setPedidos(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  const filtrarPedidos = (pedido) => {
-    const cliente = clienteNome[pedido.clienteId] ? clienteNome[pedido.clienteId].toLowerCase() : '';
-    const produto = produtoNome[pedido.produtoId] ? produtoNome[pedido.produtoId].toLowerCase() : '';
-    return cliente.includes(clienteFiltro.toLowerCase()) &&
-           produto.includes(produtoFiltro.toLowerCase());
+    setShow(true);
   };
 
   useEffect(() => {
-    if (pedidos && Object.keys(clienteNome).length !== pedidos.length && Object.keys(produtoNome).length !== pedidos.length) {
-      const promises = [];
-      pedidos.forEach((pedido) => {
-        const nomeCliente = axios.get(`http://localhost:3001/clientes/${pedido.clienteId}`)
-          .then((response) => {
-            const cliente = response.data;
-            setClienteNome((nomeAnteriorCliente) => {
-              return { ...nomeAnteriorCliente, [pedido.clienteId]: cliente.nome };
-            });
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-        const nomeProduto = axios.get(`http://localhost:3001/produtos/${pedido.produtoId}`)
-          .then((response) => {
-            const produto = response.data;
-            setProdutoNome((nomeAnteriorProduto) => {
-              return { ...nomeAnteriorProduto, [pedido.produtoId]: produto.nome };
-            });
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-        promises.push(nomeCliente);
-        promises.push(nomeProduto);
-      });
-      Promise.all(promises).then(() => {
-        console.log("Todos os clientes e produtos foram carregados com sucesso.");
-      });
+    initializeData();
+  }, []);
+
+  async function initializeData() {
+    try {
+      const pedidosRes = await axios.get("http://localhost:3001/pedidos");
+      const clientesRes = await axios.get("http://localhost:3001/clientes");
+      const produtosRes = await axios.get("http://localhost:3001/produtos");
+  
+      setPedidos(pedidosRes.data);
+      setClientes(clientesRes.data.reduce(
+        (obj, cliente) => ({ ...obj, [cliente.id]: cliente.nome }), {}
+      ));
+      setProdutos(produtosRes.data.reduce(
+        (obj, produto) => ({ ...obj, [produto.id]: produto.nome }), {}
+      ));
+    } catch (error) {
+      console.log(error);
     }
-  }, [pedidos, clienteNome, produtoNome]);
+  }
 
-  function initializeTable() {
-    axios.get("http://localhost:3001/pedidos")
-        .then(response => {
-            setPedidos(response.data);
-        })
-        .catch(error => {
-            console.log(error);
-        });
-}
+  const filtrarPedidos = (pedido) => {
+    const cliente = clientes[pedido.clienteId]
+      ? clientes[pedido.clienteId].toLowerCase()
+      : "";
+    const produto = produtos[pedido.produtoId]
+      ? produtos[pedido.produtoId].toLowerCase()
+      : "";
+    return (
+      cliente.includes(clienteFiltro.toLowerCase()) &&
+      produto.includes(produtoFiltro.toLowerCase())
+    );
+  };
 
-function onDelete() {
-    axios.delete(`http://localhost:3001/pedidos/${idPedido}`)
-        .then(response => {
-            toast.success(response.data.message, { position: "bottom-right", duration: 2000 });
-            initializeTable();
-        })
-        .catch(error => {
-            console.log(error);
-            toast.error(error.response.data.message, { position: "bottom-right", duration: 2000 });
+  function onDelete() {
+    axios
+      .delete(`http://localhost:3001/pedidos/${idPedido}`)
+      .then((response) => {
+        toast.success(response.data.message, {
+          position: "bottom-right",
+          duration: 2000,
         });
+        initializeData();
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.response.data.message, {
+          position: "bottom-right",
+          duration: 2000,
+        });
+      });
     handleClose();
-}
+  }
 
   return (
     <div className="container">
@@ -130,6 +107,7 @@ function onDelete() {
           />
         </Form.Group>
         <Button
+          className="mb-3"
           variant="secondary"
           onClick={() => {
             setClienteFiltro("");
@@ -148,6 +126,7 @@ function onDelete() {
             <tr>
               <th>Cliente</th>
               <th>Produto</th>
+              <th>Quantidade</th>
               <th>Ações</th>
             </tr>
           </thead>
@@ -155,9 +134,10 @@ function onDelete() {
             {pedidos.filter(filtrarPedidos).map((pedido) => {
               return (
                 <tr key={pedido.id}>
-                <td>{clienteNome[pedido.clienteId]}</td>
-                <td>{produtoNome[pedido.produtoId]}</td>
-                  <td className="d-flex gap-2">
+                <td>{clientes[pedido.clienteId]}</td>
+                <td>{produtos[pedido.produtoId]}</td>
+                <td>{pedido.quantidade}</td>
+                  <td className="d-flex justify-content-center gap-2">
                     <Button
                       variant="danger"
                       onClick={() => handleShow(pedido.id)}

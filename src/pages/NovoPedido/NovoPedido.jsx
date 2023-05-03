@@ -68,7 +68,7 @@ export function NovoPedido() {
             <Form.Group className="mb-3">
               <Form.Label>Codigo</Form.Label>
               <Form.Control
-                type="number"
+                type="text"
                 className={errors?.pedidos?.[index]?.codigo && "is-invalid"}
                 {...register(`pedidos.${index}.codigo`, {
                   required: {
@@ -165,11 +165,12 @@ export function NovoPedido() {
                 </Form.Text>
               )}
             </Form.Group>
-          </div>
-        ))}
-        <Button className="me-2" type="submit">
+            <Button className="mb-2" type="submit">
           Enviar pedido
         </Button>
+          </div>
+        ))}
+        
         <Button
           variant="primary"
           onClick={() =>
