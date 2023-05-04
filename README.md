@@ -1,70 +1,316 @@
-# Getting Started with Create React App
+ # Programa SoulPet
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<img src="./src/assets/banner-home.png" width= 100%> 
 
-## Available Scripts
+<br>
+Este é um api Front-end para ser integrado junto à api
+<a href="https://github.com/gabdiniz/soulpet_back"> Back-end</a> e gerar uma solução voltada para o gerenciamento de um <b>Petshop</b>, por meio de um sistema de gestão que tem o objetivo de oferecer recursos específicos para facilitar e tornar a rotina do negócio mais eficiente.
 
-In the project directory, you can run:
+<br>
 
-### `npm start`
+## Recursos e Funcionalidades <img src="./src/assets/soul-pet-logo.svg" width= 7%> 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+O programa SoulPet possui os seguintes recursos e funcionalidades para a gestão do negócio:
+- Cadastro e controle de clientes: com informações pertinentes ao cliente, tais como: nome, endereço, telefone e e-mail.
+- Cadastro e controle de pets: com informações pertinentes ao pet, tais como: nome, tipo de animal, porte, data de nascimento, identificação do dono e foto.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Cadastro e controle de produtos: com informações pertinentes ao produto, tais como: nome, preço, descrição, desconto, data de desconto e categoria, sendo que, está predefinida em higiene, brinquedos e conforto.
 
-### `npm test`
+- Inserção e controle de pedidos: com informações pertinentes ao pedido, tais como: cliente, produto e quantidade solicitados.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Cadastro e controrle de serviços: permite o registro de serviços realizados pelo petshop.
 
-### `npm run build`
+- Inserção e controle de agendamentos: possui uma seção para registrar agendamentos com informações pertinentes ao serviço solicitado para o pet, data agendada e status.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Pré-requisitos <img src="./src/assets/soul-pet-logo.svg" width= 7%> 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Antes de começar, será preciso ter instalado em sua máquina e/ou configurado as seguintes ferramentas:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Tecnologias e Ambiente de Desenvolvimento
 
-### `npm run eject`
+- [NodeJs ](https://nodejs.org/en)
+- [VSCode ](https://code.visualstudio.com/)
+- [Git ](https://git-scm.com/)
+- [GitHub ](https://github.com/)
+- [Postman ](https://www.postman.com/downloads/)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. Banco de Dados
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [Firebase ](https://firebase.google.com/?hl=pt-br)
+- [MySQL](https://www.mysql.com/)
+- [MongoDB ](https://www.mongodb.com/)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Demais tecnologias/bibliotecas/frameworks utilizados no projeto (sugestão de documentação)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- [Javascript ](https://developer.mozilla.org/pt-BR/docs/Learn/JavaScript/First_steps/What_is_JavaScript)
+- [React](https://react.dev/)
+- [Bootstrap](https://getbootstrap.com/)
+- [React Bootstrap](https://react-bootstrap.github.io/)
+- [Express](https://expressjs.com/pt-br/)
+- [Sequelize ](https://sequelize.org/)
+- [Moongose](https://mongoosejs.com/)
 
-## Learn More
+## Instalação e Execução da Aplicação <img src="./src/assets/soul-pet-logo.svg" width= 7%> 
+### Rodando o Front-end 
+<br>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+# Clone este repositório 
+$ git clone https://github.com/gabdiniz/soulpet-front
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Acesse a pasta do projeto no terminal/cmd 
+$ cd nome_da_pasta_do_projeto
 
-### Code Splitting
+# Instale as dependências
+$ npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+# Execute a aplicação em modo de desenvolvimento
+$ npm start
 
-### Analyzing the Bundle Size
+# O servidor inciará na porta:3000 - acesse <http://localhost:3000>
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Lista de Endpoints da API <img src="./src/assets/soul-pet-logo.svg" width= 7%> 
 
-### Making a Progressive Web App
+Essas são as rotas disponíveis, os recursos e os parâmetros necessários para realizar as operações:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Clientes
 
-### Advanced Configuration
+1. Insere um novo cliente (POST): /clientes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |nome|string|obrigatório|
+    |email|string|obrigatório|
+    |telefone|string|obrigatório|
+    |endereço|foreing_key|obrigatório|
 
-### Deployment
+2. Lista todos os clientes (GET): /clientes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+3. Lista um cliente específico (GET): /clientes/:id
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |id|number|obrigatório|
 
-### `npm run build` fails to minify
+4. Atualiza os dados de um cliente específico (PUT): /clientes/:id
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |id|number|obrigatório|
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+5. Exclui um cliente específico (DELETE): /clientes/:id
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |id|number|obrigatório|
+
+6. Lista o endereço de um cliente específico (GET): /clientes/:clienteId/endereco
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |clienteId|number|obrigatório|
+
+7. Lista o endereço de um cliente específico (GET): /clientes/:clienteId/pets
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |clienteId|number|obrigatório|
+
+
+<br>
+- Pets
+
+1. Insere um novo pet (POST): /pets
+
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |nome|string|obrigatório|
+    |tipo|string|obrigatório|
+    |porte|string|obrigatório|
+    |dataNasc|dateonly|não obrigatório|
+    |imagemUrl|string|não obrigatório|
+
+2. Lista todos os pets (GET): /pets
+
+3. Lista um pet específico (GET): /pets/:id
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |id|number|obrigatório|
+
+4. Atualiza os dados de um pet específico (PUT): /pets/:id
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |id|number|obrigatório|
+
+5. Exclui um pet específico (DELETE): /pets/:id
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |id|number|obrigatório|
+
+<br>
+- Produtos
+
+1. Insere um novo produto (POST): /produtos
+
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |nome|string|obrigatório|
+    |preco|string|obrigatório|
+    |descricao|string|obrigatório|
+    |desconto|double|obrigatório|
+    |dataDesconto|dateonly|obrigatório|
+    |categoria|string|obrigatório|
+
+2. Lista todos os produtos (GET): /produtos
+
+3. Lista um produto específico (GET): /produtos/:id
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |id|number|obrigatório|
+
+4. Atualiza os dados de um produto específico (PUT): /produtos/:id
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |id|number|obrigatório|
+
+5. Exclui um produto específico (DELETE): /produtos/:id
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |id|number|obrigatório|
+
+6. Exclui todos os produtos (DELETE): /produtos/all
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |all|string|obrigatório|
+
+<br>
+- Pedidos
+
+1. Insere um novo pedido (POST): /pedidos
+
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |codigo|uuid|obrigatório|
+    |quantidade|integer|obrigatório|
+    
+2. Lista todos os pedidos (GET): /pedidos
+
+3. Lista um pedido específico (GET): /pedidos/:id
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |id|number|obrigatório|
+
+4. Lista todos os pedidos correspondentes ao id do produto (GET): /pedidos/produtos/:id
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |id|number|obrigatório|
+
+5. Lista todos os pedidos correspondentes ao id do cliente (GET): /pedidos/clientes/:id
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |id|number|obrigatório|
+
+6. Atualiza os dados de um pedido específico (PUT): /pedidos/:id
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |id|number|obrigatório|
+
+7. Exclui um pedido específico (DELETE): /pedidos/:id
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |id|number|obrigatório|
+
+8. Exclui todos os pedidos correspondentes ao id do cliente (DELETE): /pedidos/clientes/:id
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |id|number|obrigatório|
+
+9. Exclui todos os pedidos correspondentes ao id do produto (DELETE): /pedidos/produtos/:id
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |id|number|obrigatório|
+
+<br>
+- Serviços
+
+1. Insere um novo serviço (POST): /servicos
+
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |nome|string|obrigatório|
+    |preco|double|obrigatório|
+    
+2. Lista todos os serviços (GET): /servicos
+
+3. Lista um serviço específico (GET): /servicos/:id
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |id|number|obrigatório|
+
+4. Atualiza os dados de um serviço específico (PUT): /serviços/:id
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |id|number|obrigatório|
+
+5. Exclui um serviço específico (DELETE): /serviços/:id
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |id|number|obrigatório|
+
+6. Exclui todos os serviços (DELETE): /servicos/all
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |all|string|obrigatório|
+
+<br>
+- Agendamentos
+
+1. Insere um novo agendamento (POST): /agendamentos
+
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |petId|number|obrigatório|
+    |servicoId|number|obrigatório|
+    |dataAgendada|dateonly|obrigatório|
+    |realizada|boolean|obrigatório|
+    
+2. Lista todos os agendamentos (GET): /agendamentos
+
+3. Lista um agendamento específico (GET): /agendamentos/:id
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |id|number|obrigatório|
+
+4. Atualiza os dados de um agendamento específico (PUT): /agendamentos/:id
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |id|number|obrigatório|
+
+5. Exclui um agendamento específico (DELETE): /agendamentos/:id
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |id|number|obrigatório|
+
+6. Exclui todos os agendamentos (DELETE): /agendamentos/all
+    | Parâmetro | Tipo | Requisito |
+    |-----------|------|----------|
+    |all|string|obrigatório|
+
+<br>
+
+## Colaboradores <img src="./src/assets/soul-pet-logo.svg" width= 7%> 
+
+|[<img src="https://avatars.githubusercontent.com/u/115419806?v=4" width=100%/><br/><sub>Gabriel Diniz<sub/>](https://github.com/gabdiniz)|[<img src="https://avatars.githubusercontent.com/u/125272384?v=4" width=100%/><br/><sub>Jonatas Vieira<sub/>](https://github.com/jhonasjhones)|[<img src="https://avatars.githubusercontent.com/u/107771309?v=4" width=100%/><br/><sub>Lucas Damaso<sub/>](https://github.com/luucdamaso)|[<img src="https://avatars.githubusercontent.com/u/116334877?v=4" width=100%/><br/><sub>Mikael Meira<sub/>](https://github.com/luucdamasohttps://github.com/zcastlem)|[<img src="https://avatars.githubusercontent.com/u/125225150?v=4" width=100%/><br/><sub>Tamires Rovere<sub/>](https://github.com/TamiresDellaRovere)|[<img src="https://avatars.githubusercontent.com/u/125217859?v=4" width=100%/><br/><sub>Sandra Silva<sub/>](https://github.com/SandramSilva)|
+|---|---|---|---|---|---|
+
+## Licença <img src="./src/assets/soul-pet-logo.svg" width= 7%> 
+
+Esta aplicação utiliza a Licença MIT, o que significa que você pode usá-la, copiá-la, modificar e distribuir o código desta aplicação, desde que seja mantida a atribuição de direitos autorais e a licença seja incluída em todas as cópias e modificações do código. Para obter mais informações sobre a Licença MIT, consulte o arquivo LICENSE.md na raiz deste repositório.
+
+## Autora
+<hr>
+<img src="https://avatars.githubusercontent.com/u/125217859?v=4" width= 10%>
+
+
+<a href="https://github.com/SandramSilva"> Sandra Silva</a>
+
+
+
+
+
