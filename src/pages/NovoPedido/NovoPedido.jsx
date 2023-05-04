@@ -35,8 +35,8 @@ export function NovoPedido() {
   function onSubmit(data) {
     const { pedidos } = data;
     const pedidoData = pedidos.map(pedido => {
-      const { codigo, quantidade, produto, cliente } = pedido;
-      return { codigo, quantidade, produtoId: produto, clienteId: cliente };
+      const {  quantidade, produto, cliente } = pedido;
+      return {  quantidade, produtoId: produto, clienteId: cliente };
     });
   
     axios
@@ -65,28 +65,7 @@ export function NovoPedido() {
             <Button variant="danger" onClick={() => remove(index)}>
               Remover produto
             </Button>
-            <Form.Group className="mb-3">
-              <Form.Label>Codigo</Form.Label>
-              <Form.Control
-                type="text"
-                className={errors?.pedidos?.[index]?.codigo && "is-invalid"}
-                {...register(`pedidos.${index}.codigo`, {
-                  required: {
-                    value: true,
-                    message: "Este campo é obrigatório.",
-                  },
-                  min: {
-                    value: 1,
-                    message: "O codigo deve ser maior que zero.",
-                  },
-                })}
-              />
-              {errors.pedidos?.[index]?.codigo?.type === "required" && (
-                <Form.Text className="invalid-feedback">
-                  {errors.pedidos[index].codigo.message}
-                </Form.Text>
-              )}
-            </Form.Group>
+            
             <Form.Group className="mb-3">
               <Form.Label>Quantidade</Form.Label>
               <Form.Control
